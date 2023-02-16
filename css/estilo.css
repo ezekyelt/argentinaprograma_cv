@@ -22,6 +22,14 @@ li{
 
 }
 
+.imagen{
+    border-radius: 75px;
+    margin: 15px;
+}
+
+.apellidoynombre{
+    margin-top: 15px;
+}
 
 .finded{
     background-color: #fcf194;

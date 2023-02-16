@@ -76,7 +76,7 @@
         <div id="picture" class="col-4 text-white"> FOTO </div>
 
         <div class="col-6 text-white p-4">
-            <h3 id="name" class="display-4">APELLIDO Y NOMBRE</h3>
+            <h3 id="name" class="display-4 apellidoynombre">APELLIDO Y NOMBRE</h3>
         </div>
 
     </div>
@@ -360,7 +360,7 @@
                 //console.log(data);
                 for ( var i = 0; i < data.results.length; i++ ) {
 
-                    document.getElementById("picture").innerHTML = "<img src='"+data.results[i].picture.large +"' alt='Italian Trulli'>";
+                    document.getElementById("picture").innerHTML = "<img class='imagen' src='"+data.results[i].picture.large +"' alt='Italian Trulli'>";
                     document.getElementById("name").innerHTML = data.results[i].name.title + " " + data.results[i].name.last +" "+ data.results[i].name.first;
                 }
             }
