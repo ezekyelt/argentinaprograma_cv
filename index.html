@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="./estilo.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/45f1739131.js" crossorigin="anonymous"></script>
+
+
+    <title>Mi Curriculo</title>
+
+
+    <script>
+
+        window.onload = function(){
+
+            var container = document.getElementById("content");
+            var results = document.getElementById("results");
+
+            function forEach(node, callback) {
+                Array.prototype.forEach.call(node.childNodes, callback);
+            }
+
+            function searchText(container, search) {
+
+                var total = 0;
+                var reg = new RegExp("(" + search + ")", "gi");
+
+                var cleanAllSearchSpans = function (parentNode) {
+                    forEach(parentNode, function (node) {
+                        if (node.nodeType === 1) {
+                            if (
+                                node.nodeName === "SPAN" &&
+                                node.dataset.search === "true"
+                            ) {
+                                parentNode.replaceChild(
+                                    document.createTextNode(node.innerText),
+                                    node
+                                );
+                            } else {
+                                cleanAllSearchSpans(node);
+                            }
+                        }
+                    });
+                };
+
+                var highlightSearchInNode = function (parentNode, search) {
+                    forEach(parentNode, function (node) {
+                        if (node.nodeType === 1) {
+                            highlightSearchInNode(node, search);
+                        } else if (
+                            node.nodeType === 3 &&
+                            reg.test(node.nodeValue)
+                        ) {
+                            var matches = node.nodeValue.match(reg);
+                            var span = document.createElement("span");
+                            span.dataset.search = "true";
+                            span.innerHTML = node.nodeValue.replace(reg, "<span class='finded'>$1</span>");
+                            parentNode.replaceChild(span, node);
+                            total += matches.length;
+                        }
+                    });
+                };
+
+                cleanAllSearchSpans(container);
+                container.normalize();
+                highlightSearchInNode(container, search);
+
+                return total;
+
+            }
+
+            //---Al presionar el botón de buscar
+            document.getElementById("button").addEventListener("click", function(){
+
+                var search = document.getElementById("search").value;
+
+                if(search.length == 0) return;
+
+                var finded = searchText(container, search);
+
+                results.innerHTML = (finded > 0)
+                    ? "Veces encontradas: " + finded
+                    : "No se ha encontrado";
+
+            });
+
+        }
+
+    </script>
+
+        <style>@import url( https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700, 300, 300italic
+);@import url( https://fonts.googleapis.com/css?family=Roboto:400, 700, 400italic, 700italic
+);html,
+body{height:100%;margin:0;padding:0}html{font-size:62.5%}body{background:#232b2b;font-family:'Open Sans Condensed', sans-serif;font-size:14px;font-size:1.4rem}h1{font-size:18px;text-align:center;text-transform:uppercase}#masthead{box-sizing:border-box;-moz-box-sizing:border-box;height:100px;padding:1.5em 2em 1em 2em;text-align:center;width:100%}#masthead h2{color:#fff;display:inline;font-family:'Open Sans Condensed', sans-serif;font-weight:300;font-size:13px;font-size:1.3rem;letter-spacing:2px;outline:0;padding:0;text-transform:uppercase;word-spacing:2px}#mainDiv{background:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;padding:0.8em 2em;margin:20px auto;max-width:1050px;width:73%}@media screen and (max-width:768px){#mainDiv{padding:0.8em 1em;width:85%}}.container{height:auto;margin-top:20px;min-height:650px;width:100%}iframe#external{border:0;height:100%;width:100%;overflow:none}footer{color:#e87a24;font-family:'Roboto', sans-serif;font-size:1.3rem;padding:1.5em 0;text-align:center}</style>
+
+</head>
+
+<body>
+
+
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Mi Curriculo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#id_perfil">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#id_extracto">Extracto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#id_herramientas">Herramientas</a>
+                </li>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Experiencia
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#id_muni">Municipalidad de Salsipuedes</a></li>
+                    <li><a class="dropdown-item" href="#id_insoft">Insoft</a></li>
+                    <li><a class="dropdown-item" href="#id_etnos">Etnos</a></li>
+                    <li><a class="dropdown-item" href="#id_funda">Fundación Carbonell</a></li>
+                </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" id="textoBuscado"placeholder="Buscar" aria-label="Buscar">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+            </div>
+        </div>
+</nav>
+
+<div class="container principal">
+
+
+    <input id="search" type="text" />
+    <button id="button">Buscar</button>
+    <span id="results"></span>
+
+
+    <div class="row mt-5 bg-black">
+        <div id="picture" class="col-4 text-white"> FOTO </div>
+
+        <div class="col-6 text-white p-4">
+            <h3 id="name" class="display-4">APELLIDO Y NOMBRE</h3>
+        </div>
+
+    </div>
+
+    <div class="row mt-5">
+
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button id="id_perfil"class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                PERFIL
+            </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+                <p><strong>Analista funcional </strong> con experiencia en el relevamiento,
+                análisis y diseño de Sistemas de Información.
+                Conocimientos necesarios para realizar el análisis de los
+                procesos de negocio. Buena comunicación para actuar como nexo entre el
+                usuario final y el equipo informático.</p>
+
+            </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <button id="id_extracto" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                EXTRACTO
+            </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+            <div class="accordion-body">
+                <p>Me considero una persona proactiva, de rápido
+                entendimiento, pensamiento lógico y sentido común.
+                Con mucha capacidad social y de comunicación, tanto oral
+                como escrita.</p>
+                <p>Valores como el respeto, cordialidad, buenos tratos,
+                sinceridad, honestidad, confiabilidad, compromiso y
+                responsabilidad, son esenciales para manejarme.
+                Capaz de trabajar en equipo, organizar, coordinar, ejecutar
+                y delegar tareas. Con cualidades de liderazgo y manejo de
+                personas.</p>
+                <p>Optimista, ordenado, práctico y resolutivo, con afán por
+                solucionar trabajos encomendados o complicaciones que
+                pudieren surgir en la vida diaria.</p>
+                <p>Con muchas ganas de aprender, capacitarme y aceptar
+                nuevas metas, desafíos, emprendimientos y proyectos, en
+                post de un crecimiento personal, laboral y profesional.</p>
+
+            </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+            <button id="id_herramientas" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                HERRAMIENTAS/ CONOCIMIENTOS
+            </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+            <div class="accordion-body">
+                Android / Angular / C++ / CSS3 / GIT / Google Products / HTML5 / Java / JQuery / JS /
+                Laravel / Linux / Microsoft Office, Visio, Project / MicroStrategy / MySQL / MySQL
+                Workbench / Netbeans / Notepad++ / PHP / Rational Rose Enterprise (IBM) / SQL /
+                Vmware / Windows /
+                Metodologías Ágiles – Patrones de diseño / Redes / UML / Gestión de proyectos /
+                Relevamiento / Análisis / Especificación de requerimientos / Documentación / Diseño
+                / Prototipos / Desarrollo / Diseño de plan y casos de pruebas / Gestión de configuración
+                / Gestión de cambios / Desarrollo de manuales y capacitación de usuarios / Gestión de
+                riesgos
+            </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="row m-5">
+        <div class="col-md-12">
+            <div class="main-timeline4">
+                <div class="timeline">
+                    <div class="timeline-content">
+                        <span class="year">2003</span>
+                        <div id="id_muni" class="inner-content">
+                            <h3 class="title">Municipalidad de Salsipuedes</h3>
+                            <p class="description">
+                                Actualmente Director de Servicios Informaticos e Innovación Tecnológica.
+                                Administración y mantenimiento informático.
+                              <!--  Coordinación de todas las áreas del Municipio, seguimiento de tareas y proyectos.
+                                Implementación y mantenimiento de Servidores de aplicaciones, Servidor de documentos
+                                NAS, Servidor de base de datos espaciales Postgres/PostGis.
+                                Administración de Cloud Server, aplicaciones propias y de tercero.
+                                Capacitación en herramientas office, manejo de windows y otros sistemas operativos.
+                                Desarrollo de aplicaciones de escritorio, móviles y en la nube.
+                                Administración y mantenimiento de sistema de Gestion Municipal PGM, auditoria e informes
+                                avanzados.
+                                Sistema de trámites y reclamos, gestión de usuarios, turnos, herramientas para captura de
+                                datos en campo, IDE VisualSIG para uso de información georreferenciada, entre otras
+                                aplicaciones de uso general.
+                                Mantenimiento de centrales telefonicas analógicas e IP, gps en moviles, DVR y camaras de
+                                vigilancia, routers y servidores locales y en linea.
+                                <p><strong>Herramientas: </strong> Office, Netbean, Code, Mysql, Postgres, Ubuntu, Windows</p>-->
+                            </p>
+                            <button class="btn btn-secondary" action="function_verMas()"> + Ampliar </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-content">
+                        <span class="year">2007</span>
+                        <div class="inner-content">
+                            <h3 id="id_insoft" class="title">InSoft</h3>
+                            <p class="description">
+                                Análisis, desarrollo, diseño y construcción de sistemas y páginas webs. Redes.
+                                Consultoría. Mailling. Marketing digital. Redes sociales. Imagen corporativa.
+                            </p>
+                            <button class="btn btn-secondary" action="function_verMas()"> + Ampliar </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-content">
+                        <span class="year">2012</span>
+                        <div id="id_etnos" class="inner-content">
+                            <h3 class="title">ETNOS</h3>
+                            <p class="description">
+                                Desarrollo de aplicaciones de escritorios para trabajos SIG (Sistemas de Información Geografica). <br>
+                                Administración de bases de datos Geoespaciales y servidores de Mapas.
+                            </p>
+                            <button class="btn btn-secondary" action="function_verMas()"> + Ampliar </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-content">
+                        <span class="year">2021</span>
+                        <div id="id_funda" class="inner-content">
+                            <h3 class="title">Fundación Carbonell</h3>
+                            <p class="description">
+                                Administración y manteniemientos de Sitios web de plataformas 100% para Educación virtual.
+                            </p>
+                            <button class="btn btn-secondary" action="function_verMas()"> + Ampliar </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div id="footer">
+    <footer class="p-4">
+
+        <div class="row text-center">
+            <div class="col-lg-4">
+                <ul class="list-group list-group-flush">
+                    <li><i class="fa-regular fa-user"></i> Clientes</li>
+                    <li><i class="fa-solid fa-address-card"></i> Contáctame</li>
+
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <ul class="list-group list-group-flush">
+                    <li><i class="fa-brands fa-square-facebook"></i> Facebook  </li>
+                    <li><i class="fa-brands fa-square-instagram"></i> Instagram</li>
+                    <li><i class="fa-brands fa-linkedin-in"></i> Linkedin</li>
+
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <ul class="list-group list-group-flush">
+                    <li><i class="fa-brands fa-whatsapp"></i> Whatsapp</li>
+                    <li><i class="fa-solid fa-money-bill"></i> Pretenciones</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+<script>
+
+        $.ajax({
+            url: 'https://randomuser.me/api/',
+            dataType: 'json',
+            success: function(data) {
+                //console.log(data);
+                for ( var i = 0; i < data.results.length; i++ ) {
+                    //console.log(data.results[i].user.name.first);
+                    //$('#example tbody').append("<tr></tr>");
+                    //$('#example tbody tr:last-of-type')
+                    //.append("<td>" + data.results[i].user.name.first + " " + data.results[i].user.name.last + "</td>")
+                    //.append("<td>" + data.results[i].user.email + "</td>")
+                    //.append("<td>" + data.results[i].user.cell + "</td>");
+
+                    document.getElementById("picture").innerHTML = "<img src='"+data.results[i].picture.large +"' alt='Italian Trulli'>";
+                    document.getElementById("name").innerHTML = data.results[i].name.title + " " + data.results[i].name.last +" "+ data.results[i].name.first;
+                }
+            }
+        });
+
+        function forEach(node, callback) {
+    Array.prototype.forEach.call(node.childNodes, callback);
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+<!-- {
+    "results": [
+      {
+        "gender": "female",
+        "name": {
+          "title": "Miss",
+          "first": "Jennie",
+          "last": "Nichols"
+        },
+        "location": {
+          "street": {
+            "number": 8929,
+            "name": "Valwood Pkwy",
+          },
+          "city": "Billings",
+          "state": "Michigan",
+          "country": "United States",
+          "postcode": "63104",
+          "coordinates": {
+            "latitude": "-69.8246",
+            "longitude": "134.8719"
+          },
+          "timezone": {
+            "offset": "+9:30",
+            "description": "Adelaide, Darwin"
+          }
+        },
+        "email": "jennie.nichols@example.com",
+        "login": {
+          "uuid": "7a0eed16-9430-4d68-901f-c0d4c1c3bf00",
+          "username": "yellowpeacock117",
+          "password": "addison",
+          "salt": "sld1yGtd",
+          "md5": "ab54ac4c0be9480ae8fa5e9e2a5196a3",
+          "sha1": "edcf2ce613cbdea349133c52dc2f3b83168dc51b",
+          "sha256": "48df5229235ada28389b91e60a935e4f9b73eb4bdb855ef9258a1751f10bdc5d"
+        },
+        "dob": {
+          "date": "1992-03-08T15:13:16.688Z",
+          "age": 30
+        },
+        "registered": {
+          "date": "2007-07-09T05:51:59.390Z",
+          "age": 14
+        },
+        "phone": "(272) 790-0888",
+        "cell": "(489) 330-2385",
+        "id": {
+          "name": "SSN",
+          "value": "405-88-3636"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/75.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/75.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+        },
+        "nat": "US"
+      }
+    ],
+    "info": {
+      "seed": "56d27f4a53bd5441",
+      "results": 1,
+      "page": 1,
+      "version": "1.4"
+    }
+  } -->
