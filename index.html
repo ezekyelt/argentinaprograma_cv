@@ -59,8 +59,15 @@
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" id="textoBuscado"placeholder="Buscar" aria-label="Buscar">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                <span id="results"></span>
+                <input class="form-control me-2" type="search" id="search"placeholder="Buscar" aria-label="Buscar">
+                <button class="btn btn-outline-success" id="button" >Buscar</button>
+
+                <!--div class="mt-5">
+                    <input id="search" type="text" />
+                    <button id="button">Buscar</button>
+                    <span id="results"></span>
+                </div-->
             </form>
             </div>
         </div>
@@ -150,11 +157,7 @@
     </div>
 
 
-    <div class="mt-5">
-        <input id="search" type="text" />
-        <button id="button">Buscar</button>
-        <span id="results"></span>
-    </div>
+
 
     <div class="row m-5">
         <div class="col-md-12">
