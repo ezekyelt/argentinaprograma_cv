@@ -27,8 +27,9 @@
 
 
 </head>
-<body id="content">
+<body id="content"> <!-- el id content es necesario para utilizar como busqueda -->
 
+    <!-- Menu superior Navegador-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Mi Curriculo</a>
@@ -59,15 +60,10 @@
                 </li>
             </ul>
             <div class="d-flex" role="search">
-                <span id="results"></span>
+                <!-- Formulario que busca por medio de javascript un texto en el body -->
+                <span class="results" id="results"></span>
                 <input class="form-control me-2" type="text" id="search" placeholder="Buscar" aria-label="Buscar">
                 <button class="btn btn-outline-success" id="button" >Buscar</button>
-
-                <!--div class="mt-5">
-                    <input id="search" type="text" />
-                    <button id="button">Buscar</button>
-                    <span id="results"></span>
-                </div-->
             </div>
             </div>
         </div>
@@ -75,6 +71,7 @@
 
 <div class="container principal">
 
+    <!-- Datos aleatorios tomados desde la API randomuser -->
     <div class="row mt-5 bg-black">
         <div id="picture" class="col-4 text-white"> FOTO </div>
 
@@ -170,20 +167,6 @@
                             <p class="description">
                                 Actualmente Director de Servicios Informaticos e Innovación Tecnológica.
                                 Administración y mantenimiento informático.
-                              <!--  Coordinación de todas las áreas del Municipio, seguimiento de tareas y proyectos.
-                                Implementación y mantenimiento de Servidores de aplicaciones, Servidor de documentos
-                                NAS, Servidor de base de datos espaciales Postgres/PostGis.
-                                Administración de Cloud Server, aplicaciones propias y de tercero.
-                                Capacitación en herramientas office, manejo de windows y otros sistemas operativos.
-                                Desarrollo de aplicaciones de escritorio, móviles y en la nube.
-                                Administración y mantenimiento de sistema de Gestion Municipal PGM, auditoria e informes
-                                avanzados.
-                                Sistema de trámites y reclamos, gestión de usuarios, turnos, herramientas para captura de
-                                datos en campo, IDE VisualSIG para uso de información georreferenciada, entre otras
-                                aplicaciones de uso general.
-                                Mantenimiento de centrales telefonicas analógicas e IP, gps en moviles, DVR y camaras de
-                                vigilancia, routers y servidores locales y en linea.
-                                <p><strong>Herramientas: </strong> Office, Netbean, Code, Mysql, Postgres, Ubuntu, Windows</p>-->
                             </p>
                             <button class="btn btn-secondary" action="function_verMas()"> + Ampliar </button>
                         </div>
@@ -234,8 +217,6 @@
 </div>
 
 
-
-
 <div id="footer">
     <footer class="p-4">
 
@@ -244,7 +225,6 @@
                 <ul class="list-group list-group-flush">
                     <li><i class="fa-regular fa-user"></i> Clientes</li>
                     <li><i class="fa-solid fa-address-card"></i> Contáctame</li>
-
                 </ul>
             </div>
             <div class="col-lg-4">
@@ -252,7 +232,6 @@
                     <li><i class="fa-brands fa-square-facebook"></i> Facebook  </li>
                     <li><i class="fa-brands fa-square-instagram"></i> Instagram</li>
                     <li><i class="fa-brands fa-linkedin-in"></i> Linkedin</li>
-
                 </ul>
             </div>
             <div class="col-lg-4">
